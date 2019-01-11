@@ -18,13 +18,15 @@ module RpnCalc
     end
     map %w[--version -v] => :version
 
-    desc 'cli', 'Command line interactive version of reverse polish notation colculator'
+    desc 'cli', 'Command line interactive version of reverse polish notation colculator. You can calculate result of '\
+                ' full command like \'> 3 2 1 + *\' or enter operands and operators one by one'
     method_option :help, aliases: '-h', type: :boolean,
-                         desc: 'You can calculate result of full command like \'> 3 2 1 + *\' or enter operands '\
-                               'and operators one by one'
+                         desc: 'Help for this command'
+    method_option :delimiter, aliases: '-d', type: :string, default: ' ',
+                         desc: 'Delimiter for operands and operators. Space will be used by default.'
     def cli(*)
       if options[:help]
-        invoke :help, ['calc']
+        invoke :help, ['cli']
       else
         require_relative 'commands/cli'
         RpnCalc::Commands::Cli.new(options).execute

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative './command_base'
-require 'tty-reader'
 
 module RpnCalc
   module Commands
