@@ -1,17 +1,16 @@
 # frozen_string_literal: true
-
-Dir.glob("*_operator.rb").each do |file|
-    require_relative file
+Dir.glob(File.dirname(__FILE__) +'/*_operator.rb').each do |file|
+  require_relative file
 end
 
 module RpnCalc
   module Calculators
     module Operators
       class OperatorsEvaluator
-        NonOperand = Class.new(ArgumentError)
+        UnknownOperator = Class.new(ArgumentError)
 
         OPERATORS_HASH = {
-          '+': AdditionOperator
+          '+': Operators::AdditionOperator
         }
 
         class << self
@@ -25,7 +24,7 @@ module RpnCalc
               operands = stack.pop(operator.arity).reverse
               stack.push(operator.evaluate(operands))
             else
-              raise NonOperand
+              raise UnknownOperator
             end
 
             stack

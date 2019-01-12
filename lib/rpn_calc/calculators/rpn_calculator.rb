@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './operators/operators.rb'
+require_relative './operators/operators_evaluator'
 
 module RpnCalc
   module Calculators
@@ -14,8 +14,8 @@ module RpnCalc
       end
 
       def process(tokens = [])
-        stack << if tokens.any?
-        return if stack.empty?
+        stack << tokens if tokens.any?
+        return stack if stack.empty?
 
         loop do
           begin

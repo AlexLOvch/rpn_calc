@@ -1,13 +1,13 @@
 # frozen_string_literal: true
-require_relative './binary_operator'
+
+require_relative './binary_operator_base'
 
 module RpnCalc
   module Calculators
     module Operators
       class AdditionOperator < BinaryOperatorBase
-          def sign
-            :+
-          end
+        def sign
+          :+
         end
       end
     end

@@ -3,10 +3,11 @@
 module RpnCalc
   module Calculators
     module Operators
-      class OperatorBase
-        MissedOperands = Class.new(ArgumentError)
+      MissedOperands = Class.new(ArgumentError)
 
-        attr accessor :operands
+      class OperatorBase
+
+        attr_accessor :operands
 
         def initialize(operands)
           @operands = operands
