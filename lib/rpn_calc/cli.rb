@@ -23,7 +23,7 @@ module RpnCalc
     method_option :help, aliases: '-h', type: :boolean,
                          desc: 'Help for this command'
     method_option :delimiter, aliases: '-d', type: :string, default: ' ',
-                         desc: 'Delimiter for operands and operators. Space will be used by default.'
+                              desc: 'Delimiter for operands and operators. Space will be used by default.'
     def cli(*)
       if options[:help]
         invoke :help, ['cli']
@@ -32,6 +32,5 @@ module RpnCalc
         RpnCalc::Commands::Cli.new(options).execute
       end
     end
-
   end
 end

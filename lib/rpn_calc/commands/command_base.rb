@@ -3,6 +3,9 @@
 require 'forwardable'
 
 module RpnCalc
+  # Defines base class for all console commands
+  #
+  # @api public
   class CommandBase
     extend Forwardable
 

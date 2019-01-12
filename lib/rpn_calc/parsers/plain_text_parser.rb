@@ -2,6 +2,7 @@
 
 module RpnCalc
   module Parsers
+    # Allows to extract tokens from the input string
     class PlainTextParser
       attr_accessor :options
 

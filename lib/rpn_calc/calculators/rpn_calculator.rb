@@ -4,6 +4,9 @@ require_relative './operators/operators_evaluator'
 
 module RpnCalc
   module Calculators
+    # Allows to process stack with  prepared operand and operators
+    #
+    # @api public
     class RPNCalculator
       attr_accessor :options, :stack
 
@@ -18,13 +21,11 @@ module RpnCalc
         return stack if stack.empty?
 
         loop do
-          begin
-            stack = RpnCalc::Calculators::Operators::OperatorsEvaluator.evaluate(stack)
-          rescue NonOperand
-            break
-          rescue StandardError => error
-            errors << error.inspect
-          end
+          RpnCalc::Calculators::Operators::OperatorsEvaluator.evaluate(stack)
+        rescue NonOperand
+          break
+        rescue StandardError => error
+          errors << error.inspect
         end
         stack
       end

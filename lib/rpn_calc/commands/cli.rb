@@ -4,6 +4,9 @@ require_relative './command_base'
 
 module RpnCalc
   module Commands
+    # Defines command cli working as REPL
+    #
+    # @api public
     class Cli < RpnCalc::CommandBase
       attr_accessor :options
 

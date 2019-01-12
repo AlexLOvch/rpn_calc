@@ -4,9 +4,8 @@ module RpnCalc
   module Calculators
     module Operators
       MissedOperands = Class.new(ArgumentError)
-
+      # Base class for all operators
       class OperatorBase
-
         attr_accessor :operands
 
         def initialize(operands)
@@ -22,16 +21,14 @@ module RpnCalc
           raise NotImplementedError, "#{self.class}##{__method__} must be implemented"
         end
 
-        def evaluate(operands)
+        def evaluate(_operands)
           raise NotImplementedError, "#{self.class}##{__method__} must be implemented"
         end
 
         def validate_operands
-          if operands.size < arity
-            raise MissedOperands, "wrong number of arguments (given #{operands.size}, expected #{arity})"
-          end
+          message = "wrong number of arguments (given #{operands.size}, expected #{arity})"
+          raise MissedOperands, message if operands.size < arity
         end
-
       end
     end
   end
