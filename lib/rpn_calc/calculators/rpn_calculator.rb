@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative './operators/operators_evaluator'
+require_relative '../parsers/plain_text_parser'
+
+require 'forwardable'
 
 module RpnCalc
   module Calculators
@@ -8,12 +11,16 @@ module RpnCalc
     #
     # @api public
     class RPNCalculator
-      attr_accessor :options, :stack
+      attr_accessor :options, :stack, :parser
+
+      extend Forwardable
+      def_delegator :@parser, :parse, :parse_line
 
       def initialize(options)
         @options = options
         @stack = []
         @errors = []
+        @parser = Parsers::PlainTextParser.new(@options)
       end
 
       def process(tokens = [])
