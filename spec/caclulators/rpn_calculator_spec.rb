@@ -34,6 +34,18 @@ module RpnCalc
           expect(calculator.process('1 0 /')).to eq [Float::INFINITY]
         end
       end
+
+      context 'when option delimiter is present' do
+        subject(:calculator) { described_class.new(delimiter: ',') }
+
+        it 'should evaluatу multioperator expressions' do
+          expect(calculator.process('3,9, 1,2,3,*, +,-,/')).to eq [1.5]
+        end
+
+        it 'should evaluatу mixed multioperator expressions' do
+          expect(calculator.process('3,9,2,3,*,1,+,-,/')).to eq [1.5]
+        end
+      end
     end
   end
 end
