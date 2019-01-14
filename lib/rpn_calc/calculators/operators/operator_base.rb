@@ -8,9 +8,9 @@ module RpnCalc
       class OperatorBase
         attr_accessor :operands
 
-        def initialize(operands)
+        def initialize(operands = nil)
           @operands = operands
-          validate_operands
+          validate_operands if operands
         end
 
         def sign

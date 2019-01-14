@@ -13,7 +13,7 @@ module RpnCalc
       end
 
       def convert(token)
-        return token if excluded_tokens&.include?(token)
+        return token if @excluded_tokens&.include?(token)
 
         to_number(token)
       end

@@ -9,7 +9,7 @@ module RpnCalc
     module Operators
       # Allows to evaluate operator from stack
       class OperatorsEvaluator
-        UnknownOperator = Class.new(ArgumentError)
+        UnknownOperatorError = Class.new(ArgumentError)
 
         OPERATORS_HASH = {
           '+': Operators::AdditionOperator
@@ -17,23 +17,29 @@ module RpnCalc
 
         class << self
           def evaluate(stack)
-            raise UnknownOperator unless operator_valid?(stack[0])
+            raise UnknownOperatorError unless operator_valid?(stack[-1])
 
             operator = operator_instance(stack.pop)
-            operands = stack.pop(operator.arity).reverse
-            stack.push(operator.evaluate(operands))
+            operator.operands = stack.pop(operator.arity).reverse
+            stack.push(operator.evaluate())
           end
 
-          private
+          def operators_signs
+            OPERATORS_HASH.keys.map(&:to_s)
+          end
 
           def operator_valid?(operator)
+            return false unless operator.respond_to?(:to_sym)
             OPERATORS_HASH.key?(operator.to_sym)
           end
 
           def operator_instance(operator_sign)
-            OPERATORS_HASH[operator_sign].new
+            OPERATORS_HASH[operator_sign.to_sym].new
           end
         end
+
+        private_class_method :operator_valid?
+        private_class_method :operator_instance
       end
     end
   end

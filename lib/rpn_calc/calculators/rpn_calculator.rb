@@ -12,31 +12,45 @@ module RpnCalc
     # Allows to process stack with  prepared operand and operators
     #
     # @api public
-    class RPNCalculator
-      attr_accessor :options, :stack, :parser
+    class RpnCalculator
+      attr_accessor :options, :stack, :parser, :evaluator, :errors
 
       extend Forwardable
       def_delegator :@parser, :parse, :parse_line
+      def_delegator :@parser, :errors, :parser_errors
+      def_delegator :@evaluator, :evaluate, :calculate
+      def_delegator :@evaluator, :operators_signs, :allowed_operators
 
-      def initialize(options)
+      def initialize(options = {})
         @options = options
         @stack = []
         @errors = []
-        @parser = Parsers::PlainTextParser.new(@options)
+        @evaluator =  Operators::OperatorsEvaluator
+
+        @parser = Parsers::PlainTextParser.new(
+          delimiter: options[:delimiter],
+          validator: Validators::TokenValidator.new(allowed_tokens: allowed_operators),
+          converter: Converters::TokenConverter.new(excluded_tokens: allowed_operators)
+        )
       end
 
-      def process(tokens = [])
-        stack << tokens if tokens.any?
-        return stack if stack.empty?
+      def process(line)
+        @errors = []
+        tokens = parse_line(line)
+        @errors += parser_errors
 
-        loop do
-          RpnCalc::Calculators::Operators::OperatorsEvaluator.evaluate(stack)
-        rescue NonOperand
-          break
-        rescue StandardError => error
-          errors << error.inspect
+        return @stack if tokens.empty?
+
+        while tokens.any?
+          token = tokens.shift
+          @stack.push(token)
+          begin
+            @stack = calculate(@stack) if allowed_operators.include?(token)
+          rescue StandardError => error
+            @errors << error.inspect
+          end
         end
-        stack
+        @stack
       end
     end
   end

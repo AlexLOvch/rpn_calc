@@ -12,6 +12,8 @@ module RpnCalc
         end
 
         def evaluate
+          validate_operands
+
           operands[0].send(sign, operands[1])
         end
       end
