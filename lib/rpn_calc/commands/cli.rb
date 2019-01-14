@@ -19,7 +19,7 @@ module RpnCalc
         @output_stream = IOProviders::IOProviderConsole.new if options[:output] == 'console'
       end
 
-      def execute()
+      def execute
         loop do
           input_line = @input_stream.read&.chomp
           if input_line == 'q' || input_line.nil?
@@ -30,7 +30,7 @@ module RpnCalc
           rpn_calculator.process(input_line) unless input_line.to_s.empty?
 
           @output_stream.write(rpn_calculator.last_result.to_s + "\n") if rpn_calculator.last_result
-          @output_stream.write("  Warnings/Errors: "+ rpn_calculator.errors.join(' ') + "\n") if rpn_calculator.errors.any?
+          @output_stream.write(" Warnings/Errors: #{rpn_calculator.errors.join(' ')}\n") if rpn_calculator.errors.any?
         end
       end
     end

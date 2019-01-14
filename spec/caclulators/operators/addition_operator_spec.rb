@@ -37,7 +37,7 @@ module RpnCalc
         end
 
         it 'returns sum of arguments in case of one of them is negative' do
-          expect(described_class.new([3, -7]).evaluate).to eq -4
+          expect(described_class.new([3, -7]).evaluate).to eq(-4)
         end
       end
 

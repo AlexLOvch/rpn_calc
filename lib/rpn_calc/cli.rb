@@ -25,9 +25,9 @@ module RpnCalc
     method_option :delimiter, aliases: '-d', type: :string,
                               desc: ' Space will be used by default.'
     method_option :input, aliases: '-i', enum: ['console'], default: 'console',
-                              desc: 'Input source for calculator'
+                          desc: 'Input source for calculator'
     method_option :output, aliases: '-o', enum: ['console'], default: 'console',
-                              desc: 'Output source for calculator'
+                           desc: 'Output source for calculator'
     def cli(*)
       if options[:help]
         invoke :help, ['cli']

@@ -29,7 +29,7 @@ module RpnCalc
         end
 
         it 'returns substract of arguments' do
-          expect(described_class.new([2, 3]).evaluate).to eq -1
+          expect(described_class.new([2, 3]).evaluate).to eq(-1)
         end
 
         it 'returns substract of fractional arguments' do

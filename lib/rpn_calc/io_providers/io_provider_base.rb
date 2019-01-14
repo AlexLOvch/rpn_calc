@@ -2,6 +2,7 @@
 
 module RpnCalc
   module IOProviders
+    # Base class for IO operations
     class IOProviderBase
       attr_accessor :options
 

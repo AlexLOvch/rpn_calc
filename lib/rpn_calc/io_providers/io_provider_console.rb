@@ -4,9 +4,10 @@ require_relative './io_provider_base.rb'
 
 module RpnCalc
   module IOProviders
+    # Class for IO through console
     class IOProviderConsole < IOProviderBase
       def read
-        prompt()
+        prompt
         $stdin.gets
       end
 
@@ -17,7 +18,7 @@ module RpnCalc
       protected
 
       def prompt
-        write("> ")
+        write('> ')
       end
     end
   end

@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 require 'rpn_calc/cli'
 
 Signal.trap('INT') do
-  warn(" RPN calculator interrupted!")
+  warn(' RPN calculator interrupted!')
   exit(1)
 end
 

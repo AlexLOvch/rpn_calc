@@ -25,7 +25,7 @@ module RpnCalc
         @options = options
         @stack = []
         @errors = []
-        @evaluator =  Operators::OperatorsEvaluator
+        @evaluator = Operators::OperatorsEvaluator
 
         @parser = Parsers::PlainTextParser.new(
           delimiter: options[:delimiter],
@@ -56,7 +56,7 @@ module RpnCalc
       def stack_top
         @stack[-1] if @stack.any?
       end
-      alias_method :last_result, :stack_top
+      alias last_result stack_top
     end
   end
 end
