@@ -29,7 +29,7 @@ module RpnCalc
 
           rpn_calculator.process(input_line) unless input_line.to_s.empty?
 
-          @output_stream.write(rpn_calculator.stack[-1].to_s + "\n") if rpn_calculator.stack.any?
+          @output_stream.write(rpn_calculator.last_result.to_s + "\n") if rpn_calculator.last_result
           @output_stream.write("  Warnings/Errors: "+ rpn_calculator.errors.join(' ') + "\n") if rpn_calculator.errors.any?
         end
       end

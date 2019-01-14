@@ -47,13 +47,16 @@ module RpnCalc
           begin
             @stack = calculate(@stack) if allowed_operators.include?(token)
           rescue StandardError => error
-require 'byebug'
-byebug
             @errors << error.message
           end
         end
         @stack
       end
+
+      def stack_top
+        @stack[-1] if @stack.any?
+      end
+      alias_method :last_result, :stack_top
     end
   end
 end
