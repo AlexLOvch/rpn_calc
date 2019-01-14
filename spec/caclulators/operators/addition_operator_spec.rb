@@ -35,6 +35,10 @@ module RpnCalc
         it 'returns sum of fractional arguments' do
           expect(described_class.new([3.0, 0.2]).evaluate).to eq 3.2
         end
+
+        it 'returns sum of arguments in case of one of them is negative' do
+          expect(described_class.new([3, -7]).evaluate).to eq -4
+        end
       end
 
       context 'when input is invalid' do

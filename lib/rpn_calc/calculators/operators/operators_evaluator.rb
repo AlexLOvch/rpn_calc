@@ -12,7 +12,10 @@ module RpnCalc
         UnknownOperatorError = Class.new(ArgumentError)
 
         OPERATORS_HASH = {
-          '+': Operators::AdditionOperator
+          :'+' => Operators::AdditionOperator,
+          :'*' => Operators::MultiplicationOperator,
+          :'-' => Operators::SubtractionOperator,
+          :'/' => Operators::DivisionOperator
         }.freeze
 
         class << self
@@ -20,7 +23,7 @@ module RpnCalc
             raise UnknownOperatorError unless operator_valid?(stack[-1])
 
             operator = operator_instance(stack.pop)
-            operator.operands = stack.pop(operator.arity).reverse
+            operator.operands = stack.pop(operator.arity)
             stack.push(operator.evaluate())
           end
 

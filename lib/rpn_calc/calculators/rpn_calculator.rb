@@ -47,7 +47,9 @@ module RpnCalc
           begin
             @stack = calculate(@stack) if allowed_operators.include?(token)
           rescue StandardError => error
-            @errors << error.inspect
+require 'byebug'
+byebug
+            @errors << error.message
           end
         end
         @stack
