@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require_relative './operators/operators_evaluator'
-require_relative '../parsers/plain_text_parser'
+require 'rpn_calc/parsers/plain_text_parser'
+require 'rpn_calc/validators/token_validator'
+require 'rpn_calc/converters/token_converter'
 
 require 'forwardable'
 

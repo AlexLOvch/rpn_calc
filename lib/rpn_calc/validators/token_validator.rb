@@ -3,7 +3,7 @@
 module RpnCalc
   module Validators
     # Allows to check token by availabililty list or is it numeric
-    class TokensValidator
+    class TokenValidator
       attr_accessor :allowed_tokens, :errors
 
       def initialize(options = {})

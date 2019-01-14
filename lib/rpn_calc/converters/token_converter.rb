@@ -2,8 +2,10 @@
 
 module RpnCalc
   module Converters
+    WrongToken = Class.new(ArgumentError)
+
     # Allows to convert token exludes availabililty list or is it numeric
-    class TokensConverter
+    class TokenConverter
       attr_accessor :excluded_tokens
 
       def initialize(options = {})
@@ -18,8 +20,8 @@ module RpnCalc
 
       def to_number(token)
         Float(token)
-      rescue StandardError
-        0.0
+      rescue ArgumentError
+        raise WrongToken
       end
     end
   end

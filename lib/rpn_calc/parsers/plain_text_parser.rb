@@ -16,18 +16,20 @@ module RpnCalc
         @errors = []
         out = []
 
-        tokens = input_string.chomp.split(delimiter || ' ')
+        tokens = input_string.split(delimiter || ' ').map(&:strip)
         tokens.each do |token|
-          out << convert(token) if valid?(token)
+          out << convert(token) if token_valid?(token)
         end
 
         out
       end
 
-      def valid?(token)
+      def token_valid?(token)
         return true unless validator
+        return true if validator.valid?(token)
 
         @errors += validator.errors.map { |error| error + ' Ignored.' } unless validator.valid?(token)
+        false
       end
 
       def convert(token)
