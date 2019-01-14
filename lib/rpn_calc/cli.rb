@@ -22,8 +22,12 @@ module RpnCalc
                 ' full command like \'> 3 2 1 + *\' or enter operands and operators one by one'
     method_option :help, aliases: '-h', type: :boolean,
                          desc: 'Help for this command'
-    method_option :delimiter, aliases: '-d', type: :string, default: ' ',
-                              desc: 'Delimiter for operands and operators. Space will be used by default.'
+    method_option :delimiter, aliases: '-d', type: :string,
+                              desc: ' Space will be used by default.'
+    method_option :input, aliases: '-i', enum: ['console'], default: 'console',
+                              desc: 'Input source for calculator'
+    method_option :output, aliases: '-o', enum: ['console'], default: 'console',
+                              desc: 'Output source for calculator'
     def cli(*)
       if options[:help]
         invoke :help, ['cli']
