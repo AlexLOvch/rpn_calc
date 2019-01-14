@@ -25,7 +25,7 @@ TODO: Upload gem and add gem install instruction here
 You'll see commands help:
 ```console
  Commands:
-   rpn_calc cli             # Command line interactive version of reverse polish notation colculator. You can calculate result of full command like '> 3 2 1 + *' or e...
+   rpn_calc cli             # Command line interactive version of reverse polish notation calculator. You can calculate result of full command like '> 3 2 1 + *' or e...
    rpn_calc help [COMMAND]  # Describe available commands or one specific command
    rpn_calc version         # rpn_calc version
 ```
@@ -84,17 +84,17 @@ To  quit from RPN calculator enter `q` or press `Ctrl+D`
 * The architectural solution uses [SOLID](https://en.wikipedia.org/wiki/SOLID) principles. 
 * Reverse polish notation calculation task had been split for two steps: 
     1. Parse input string. The main class for this step is `Parsers::PlainTextParser`. `PlainTextParser` can be configured by initializing options including `:delimiter`, `:validator` and `:converter`. First of all `PlainTextParser` splits input line to tokens list by `:delimiter`. Then using `:validator` and `:converter` (separate classes instances(`Validators::TokenValidator` and `Converters::TokenConverter` accordingly) it process tokens. `TokenValidator` allows to exclude wrong tokens, and returns validation  errors. `TokenConverter` allows to convert string tokens into numeric ones. The output of parsing is tokens list(ruby array).
-    2. Process stack. Adding tokens from input tokens list into stack(also ruby array) `RpnCalculator` uses `Operators::OperatorsEvaluator` class to calculate each operation. There are separate operator classes to evaluate arithmetic operations `+`, `-`, `*` and `/`(in the `Operators` module: `AdditionOperator`, `SubtractionOperator`, `MultiplicationOperator` and `DivisionOperator` accordingly).   
-* All classes(except most top one `RpnCalculator`) based on [SRP](https://en.wikipedia.org/wiki/Single_responsibility_principle), so they are loosely coupled and highly reusable. That's maybe not so important for such small project as that one, but should be highly recommended for big ones. 
+    2. Process stack. Adding tokens from input tokens list into stack(also ruby array) `RpnCalculator` uses `Operators::OperatorsEvaluator` class to calculate each operation. There are separate operator classes to evaluate arithmetic operations `+`, `-`, `*` and `/`(in the `Operators` module: `AdditionOperator`, `SubtractionOperator`, `MultiplicationOperator` and `DivisionOperator` accordingly).
+* All classes(except most top one `RpnCalculator`) based on [SRP](https://en.wikipedia.org/wiki/Single_responsibility_principle), so they are loosely coupled and highly reusable. That's maybe not so important for such small project as that one, but should be highly recommended for big ones.
 * To simplify using alternate interface(as per requirements) class `IOProviders::IOProviderConsole` had been extracted.
 * Сode is well tested(coverage is 98.65%)
 * Code is [Rubocop](https://github.com/rubocop-hq/rubocop) requirements compatible
 
-## Trade-offs/possible improvments
+## Trade-offs/possible improements
 
 ### For user
 * Add subcommands `clear_stack` and `show_stack`
-* Add UI inhancements like colorized output with [pastel](https://github.com/piotrmurach/pastel)
+* Add UI enhancements like colorized output with [pastel](https://github.com/piotrmurach/pastel)
 
 ### From technical side
 * DRY specs for operators
@@ -104,7 +104,7 @@ To  quit from RPN calculator enter `q` or press `Ctrl+D`
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. 
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests.
 
 ## Contributing
 
